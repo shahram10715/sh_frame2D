@@ -1,7 +1,7 @@
 from solve import solve
 import numpy as np
-from frame2D import Frame2D
-from node2D import Node2D
+from frame2D import *
+from node2D import *
 ###########################################################################################
 #####    COPY ALL THE PY FILES IN THE MAIN DIRECTORY HERE
 ###########################################################################################
@@ -21,27 +21,23 @@ A = 2e-2
 
 f1 = Frame2D(1, E, A, I, n1, n2)
 f2 = Frame2D(2, E, A, I, n2, n3)
-f3 = Frame2D(3, E, A, I, n4, n3)
+f3 = Frame2D(3, E, A, I, n3, n4)
 
-deadLoad = np.zeros(3*len(Node2D.nodeList))
-deadLoad[3] = -20e3
-deadLoad[8] = 12e3
+deadLoads = np.zeros(3*len(Node2D.nodeList))
+deadLoads = applyNodeLoad(deadLoads, n2, [-20e3, 0, 0])
+deadLoads = applyNodeLoad(deadLoads, n3, [0, 0, 12e3])
 
-constraints = [0,1,2,9,10,11]
+constraints = np.zeros(3*len(Node2D.nodeList))
+constraints = applyNodConstraint(constraints, n1, [1,1,1])
+constraints = applyNodConstraint(constraints, n4, [1,1,1])
 
+U, F = solve(Node2D.nodeList, Frame2D.frame2dList, deadLoads, constraints)
 
-U, F = solve(Node2D.nodeList, Frame2D.frame2dList, deadLoad, constraints)
-print(U)
-print(F)
-print('======================')
+print(getElemDisp(f1, U))
+print(getElemForce(f1, U))
 
+print(getElemDisp(f2, U))
+print(getElemForce(f2, U))
 
-for elem in Frame2D.frame2dList:
-    print('element ', elem.tag, ' displacements:')
-    print(elem.getElemDisp(U))
-    print('-------------------')
-    print('element ', elem.tag, ' forces:')
-    print(elem.getElemForce(elem.getElemDisp(U)))
-    print('===================')
-
-
+print(getElemDisp(f3, U))
+print(getElemForce(f3, U))
