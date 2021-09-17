@@ -15,7 +15,7 @@ def applyNodeLoad(loads, node, nodeLoad):
     loads[3*node.tag-1] = nodeLoad[2]
     return loads
 
-def applyNodConstraint(constraints, node, nodeConstraint):
+def applyNodeConstraint(constraints, node, nodeConstraint):
     constraints[3*node.tag-3] = nodeConstraint[0]
     constraints[3*node.tag-2] = nodeConstraint[1]
     constraints[3*node.tag-1] = nodeConstraint[2]
