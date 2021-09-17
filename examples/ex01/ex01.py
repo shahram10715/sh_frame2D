@@ -28,8 +28,8 @@ deadLoads = applyNodeLoad(deadLoads, n2, [-20e3, 0, 0])
 deadLoads = applyNodeLoad(deadLoads, n3, [0, 0, 12e3])
 
 constraints = np.zeros(3*len(Node2D.nodeList))
-constraints = applyNodConstraint(constraints, n1, [1,1,1])
-constraints = applyNodConstraint(constraints, n4, [1,1,1])
+constraints = applyNodeConstraint(constraints, n1, [1,1,1])
+constraints = applyNodeConstraint(constraints, n4, [1,1,1])
 
 U, F = solve(Node2D.nodeList, Frame2D.frame2dList, deadLoads, constraints)
 
