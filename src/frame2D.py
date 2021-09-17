@@ -28,11 +28,11 @@ class Frame2D:
         elif delx > 0 and dely > 0:
             self.angle = np.arctan(dely/delx)
         elif delx < 0 and dely > 0:
-            self.angle = np.pi - np.arctan(dely/delx)
+            self.angle = np.pi - np.arctan(-dely/delx)
         elif delx < 0 and dely < 0:
             self.angle = np.pi + np.arctan(dely/delx)
         elif delx > 0 and dely < 0:
-            self.angle = 2*np.pi - np.arctan(dely/delx)
+            self.angle = 2*np.pi - np.arctan(-dely/delx)
         else:
             print('warning finding angle with X axix')
         Frame2D.frame2dList.append(self)
