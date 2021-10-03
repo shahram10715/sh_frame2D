@@ -17,9 +17,7 @@ def solve(nodes, elems, forces, constraints):
     dispTemp = np.zeros(3*nNodes)
     j = 0
     for i in range(3*nNodes):
-        if i in fix:
-            pass
-        else:
+        if i not in fix:
             dispTemp[i] = dispVector[j]
             j += 1
     dispVector = dispTemp
