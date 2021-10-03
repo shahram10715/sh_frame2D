@@ -64,11 +64,7 @@ def getStiffMatrix(frame):
     ke[4, 4] = k2
     ke[4, 5] = ke[5, 4] = -k3
     ke[5, 5] = k4
-    # multiply stiffness modifiers to rows and columns
-    for i in range(6):
-        if frame.stiffModifier[i] == 0:
-            ke[i, :] = 0
-            ke[:, i] = 0
+
     R = np.zeros((6,6))
     R[0, 0] = np.cos(ang)
     R[0, 1] = np.sin(ang)
