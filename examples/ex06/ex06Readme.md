@@ -8,6 +8,5 @@ determine:
 * Gloabal stiffness matrix
 * All the displacements
 * All the forces
-* Internal force for each element
 
 ![Screenshot](./ex06.png)
