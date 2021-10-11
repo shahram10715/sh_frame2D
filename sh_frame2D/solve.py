@@ -10,13 +10,19 @@ def getGlobalMatrix(nodes, elems):
         kglobal = assemble(kglobal, elem, kelem)
     return kglobal
 
+def getPartMatrix(nodes, elems, constraints):
+    kglobal = getGlobalMatrix(nodes, elems)
+    fix = getFixes(constraints)
+    kpart = kglobal
+    kpart = np.delete(kpart, fix, 0)
+    kpart = np.delete(kpart, fix, 1)
+    return kpart
+
 def solve(nodes, elems, forces, constraints):
     nNodes = len(nodes)
     fix = getFixes(constraints)
     kglobal = getGlobalMatrix(nodes, elems)
-    kpart = kglobal
-    kpart = np.delete(kpart, fix, 0)
-    kpart = np.delete(kpart, fix, 1)
+    kpart = getPartMatrix(nodes, elems, constraints)
     forcesParted = np.delete(forces, fix)
     dispVector = np.matmul(np.linalg.inv(kpart), forcesParted)
     dispTemp = np.zeros(3*nNodes)
