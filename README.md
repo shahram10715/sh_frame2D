@@ -1,4 +1,4 @@
-# sh_structure
+# sh_frame2D
 matrix analysis of structures
 
 
